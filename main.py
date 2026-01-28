@@ -35,6 +35,7 @@ def create_reservation(reservation_data: ReservationCreate):
 def delete_reservation(reservation_id: int):
     """Delete a reservation by ID."""
     validation.validate_reservation_exists(reservation_id)
+    database.delete_reservation(reservation_id)
 
 
 @app.get("/rooms/{room_id}/reservations", response_model=List[Reservation])

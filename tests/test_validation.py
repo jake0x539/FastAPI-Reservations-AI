@@ -146,9 +146,9 @@ def test_validate_reservation_exists():
     end = start + timedelta(hours=2)
     database.create_reservation(1, 1, start, end)
 
-    # Should not raise for existing reservation (and delete it)
+    # Should not raise for existing reservation
     validation.validate_reservation_exists(1)
-    assert len(database.reservations) == 0
+    assert len(database.reservations) == 1
 
     # Should raise for non-existent reservation
     with pytest.raises(HTTPException) as exc_info:

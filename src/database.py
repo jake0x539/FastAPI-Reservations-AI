@@ -109,6 +109,15 @@ def delete_reservation(reservation_id: int) -> bool:
     return False
 
 
+def get_reservation_by_id(reservation_id: int) -> Optional[Reservation]:
+    """
+    Get a reservation by ID.
+
+    Returns the reservation if found, None otherwise.
+    """
+    return next((res for res in reservations if res.id == reservation_id), None)
+
+
 def check_customer_email_exists(email: str) -> bool:
     """
     Check if a customer with the given email already exists.

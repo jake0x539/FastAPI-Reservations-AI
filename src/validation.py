@@ -58,11 +58,12 @@ def validate_room_exists(room_id: int) -> None:
 
 def validate_reservation_exists(reservation_id: int) -> None:
     """
-    Validate that a reservation exists and delete it.
+    Validate that a reservation exists.
 
     Raises HTTPException if reservation not found.
     """
-    if not database.delete_reservation(reservation_id):
+    reservation = database.get_reservation_by_id(reservation_id)
+    if not reservation:
         raise HTTPException(
             status_code=404,
             detail=f"Reservation with id {reservation_id} not found"
