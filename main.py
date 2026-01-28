@@ -1,3 +1,5 @@
+"""FastAPI application for conference room reservation system."""
+
 from contextlib import asynccontextmanager
 from typing import List
 from fastapi import FastAPI

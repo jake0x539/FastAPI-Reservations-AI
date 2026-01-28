@@ -1,3 +1,5 @@
+"""Validation logic for API endpoints."""
+
 from fastapi import HTTPException
 from models import ReservationCreate, CustomerCreate
 import database
@@ -9,7 +11,6 @@ def validate_reservation(reservation_data: ReservationCreate) -> None:
 
     Raises HTTPException if validation fails.
     """
-    # Check if customer exists
     customer = database.get_customer(reservation_data.customer_id)
     if not customer:
         raise HTTPException(
@@ -17,7 +18,6 @@ def validate_reservation(reservation_data: ReservationCreate) -> None:
             detail=f"Customer with id {reservation_data.customer_id} not found"
         )
 
-    # Check if room exists
     room = database.get_room(reservation_data.room_id)
     if not room:
         raise HTTPException(
@@ -25,14 +25,12 @@ def validate_reservation(reservation_data: ReservationCreate) -> None:
             detail=f"Room with id {reservation_data.room_id} not found"
         )
 
-    # Check if start time is in the past
     if database.check_past_reservation(reservation_data.start_time):
         raise HTTPException(
             status_code=400,
             detail="Cannot create reservations in the past"
         )
 
-    # Check for time conflicts
     if database.check_time_conflict(
         reservation_data.room_id,
         reservation_data.start_time,

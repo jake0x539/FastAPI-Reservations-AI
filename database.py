@@ -1,14 +1,14 @@
+"""In-memory database implementation for conference room reservations."""
+
 from datetime import datetime, timezone
 from typing import List, Optional
 from models import Customer, Room, Reservation
 
 
-# In-memory storage
 customers: List[Customer] = []
 rooms: List[Room] = []
 reservations: List[Reservation] = []
 
-# ID counters
 _next_customer_id = 1
 _next_room_id = 1
 _next_reservation_id = 1
@@ -51,6 +51,7 @@ def get_reservations_for_room(room_id: int) -> List[Reservation]:
 def check_time_conflict(room_id: int, start_time: datetime, end_time: datetime, exclude_reservation_id: Optional[int] = None) -> bool:
     """
     Check if a time period conflicts with existing reservations for a room.
+
     Returns True if there is a conflict, False otherwise.
     """
     room_reservations = [
@@ -59,7 +60,6 @@ def check_time_conflict(room_id: int, start_time: datetime, end_time: datetime, 
     ]
 
     for reservation in room_reservations:
-        # Check for any overlap: new_start < existing_end AND new_end > existing_start
         if start_time < reservation.end_time and end_time > reservation.start_time:
             return True
 
@@ -69,6 +69,7 @@ def check_time_conflict(room_id: int, start_time: datetime, end_time: datetime, 
 def check_past_reservation(start_time: datetime) -> bool:
     """
     Check if the start time is in the past.
+
     Returns True if it's in the past, False otherwise.
     """
     now = datetime.now(timezone.utc)
@@ -95,6 +96,7 @@ def create_reservation(customer_id: int, room_id: int, start_time: datetime, end
 def delete_reservation(reservation_id: int) -> bool:
     """
     Delete a reservation by ID.
+
     Returns True if deleted, False if not found.
     """
     global reservations
@@ -110,6 +112,7 @@ def delete_reservation(reservation_id: int) -> bool:
 def check_customer_email_exists(email: str) -> bool:
     """
     Check if a customer with the given email already exists.
+
     Returns True if email exists, False otherwise.
     """
     return any(customer.email == email for customer in customers)
@@ -118,6 +121,7 @@ def check_customer_email_exists(email: str) -> bool:
 def check_customer_name_exists(name: str) -> bool:
     """
     Check if a customer with the given name already exists.
+
     Returns True if name exists, False otherwise.
     """
     return any(customer.name == name for customer in customers)

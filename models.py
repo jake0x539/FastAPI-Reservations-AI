@@ -1,19 +1,27 @@
+"""Pydantic models for conference room reservation system."""
+
 from datetime import datetime
 from pydantic import BaseModel, EmailStr, field_validator
 
 
 class Customer(BaseModel):
+    """Customer model with unique identification."""
+
     id: int
     name: str
     email: EmailStr
 
 
 class Room(BaseModel):
+    """Conference room model."""
+
     id: int
     name: str
 
 
 class Reservation(BaseModel):
+    """Reservation model with timezone-aware datetime fields."""
+
     id: int
     customer_id: int
     room_id: int
@@ -38,6 +46,8 @@ class Reservation(BaseModel):
 
 
 class ReservationCreate(BaseModel):
+    """Request model for creating a new reservation."""
+
     customer_id: int
     room_id: int
     start_time: datetime
@@ -61,5 +71,7 @@ class ReservationCreate(BaseModel):
 
 
 class CustomerCreate(BaseModel):
+    """Request model for creating a new customer."""
+
     name: str
     email: EmailStr
