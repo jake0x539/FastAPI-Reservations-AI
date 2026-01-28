@@ -98,9 +98,13 @@ def delete_reservation(reservation_id: int) -> bool:
     Returns True if deleted, False if not found.
     """
     global reservations
-    initial_length = len(reservations)
-    reservations = [res for res in reservations if res.id != reservation_id]
-    return len(reservations) < initial_length
+
+    for i, reservation in enumerate(reservations):
+        if reservation.id == reservation_id:
+            reservations.pop(i)
+            return True
+
+    return False
 
 
 def check_customer_email_exists(email: str) -> bool:
