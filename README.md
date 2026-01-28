@@ -103,7 +103,7 @@ uv run pytest test_api.py
 ## Documentation
 
 - **[API Documentation](docs/API_DOCUMENTATION.md)** - Complete API reference with all endpoints, request/response formats, and data models
-- **[Frontend Integration Guide](docs/FRONTEND_INTEGRATION.md)** - Guide for integrating the API with frontend applications, including CORS setup, datetime handling, error handling, and code examples
+- **[Frontend Integration Guide](docs/FRONTEND_INTEGRATION.md)** - Guide for integrating the API with frontend applications, including datetime handling, error handling, and code examples
 
 ## Project Structure
 

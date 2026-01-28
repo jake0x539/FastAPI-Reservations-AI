@@ -2,23 +2,6 @@
 
 This guide provides information for frontend developers integrating with the Conference Room Reservation API.
 
-## CORS Configuration
-
-The API currently does not include CORS middleware. If you need to access the API from a frontend application running on a different origin, you'll need to add CORS support.
-
-Add this to `main.py`:
-```python
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Your frontend URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-```
-
 ## DateTime Handling
 
 All datetime fields must be:
@@ -160,78 +143,6 @@ const deleteReservation = async (reservationId) => {
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.detail);
-  }
-};
-```
-
-### Using Axios
-
-```javascript
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: 'http://localhost:8000',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
-// Create a customer
-const createCustomer = async (name, email) => {
-  try {
-    const response = await api.post('/customers', { name, email });
-    return response.data;
-  } catch (error) {
-    console.error('Error creating customer:', error.response.data.detail);
-    throw error;
-  }
-};
-
-// Create a reservation
-const createReservation = async (customerId, roomId, startTime, endTime) => {
-  try {
-    const response = await api.post('/reservations', {
-      customer_id: customerId,
-      room_id: roomId,
-      start_time: startTime,
-      end_time: endTime
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error creating reservation:', error.response.data.detail);
-    throw error;
-  }
-};
-
-// Get room reservations
-const getRoomReservations = async (roomId) => {
-  try {
-    const response = await api.get(`/rooms/${roomId}/reservations`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching reservations:', error.response.data.detail);
-    throw error;
-  }
-};
-
-// List all rooms
-const listRooms = async () => {
-  try {
-    const response = await api.get('/rooms');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching rooms:', error.response.data.detail);
-    throw error;
-  }
-};
-
-// Delete a reservation
-const deleteReservation = async (reservationId) => {
-  try {
-    await api.delete(`/reservations/${reservationId}`);
-  } catch (error) {
-    console.error('Error deleting reservation:', error.response.data.detail);
-    throw error;
   }
 };
 ```
