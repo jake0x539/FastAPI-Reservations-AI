@@ -14,7 +14,8 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 
 # Copy application code
-COPY models.py database.py main.py ./
+COPY src/ ./src/
+COPY main.py ./
 
 # Expose port 8000
 EXPOSE 8000

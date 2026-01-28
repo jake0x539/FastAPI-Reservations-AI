@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime, timezone, timedelta
-from models import Customer, Room, Reservation
-import database
+from src.models import Customer, Room, Reservation
+from src import database
 
 
 @pytest.fixture(autouse=True)

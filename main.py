@@ -3,9 +3,9 @@
 from contextlib import asynccontextmanager
 from typing import List
 from fastapi import FastAPI
-from models import Reservation, ReservationCreate, Customer, CustomerCreate
-import database
-import validation
+from src.models import Reservation, ReservationCreate, Customer, CustomerCreate
+from src import database
+from src import validation
 
 
 @asynccontextmanager

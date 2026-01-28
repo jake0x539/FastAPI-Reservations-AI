@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 from typing import List, Optional
-from models import Customer, Room, Reservation
+from src.models import Customer, Room, Reservation
 
 
 customers: List[Customer] = []

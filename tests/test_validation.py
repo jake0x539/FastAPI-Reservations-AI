@@ -1,9 +1,9 @@
 import pytest
 from datetime import datetime, timezone, timedelta
 from fastapi import HTTPException
-from models import ReservationCreate, CustomerCreate
-import database
-import validation
+from src.models import ReservationCreate, CustomerCreate
+from src import database
+from src import validation
 
 
 @pytest.fixture(autouse=True)

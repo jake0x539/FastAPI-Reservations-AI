@@ -102,27 +102,32 @@ uv run pytest test_api.py
 
 ## Documentation
 
-- **[API Documentation](API_DOCUMENTATION.md)** - Complete API reference with all endpoints, request/response formats, and data models
-- **[Frontend Integration Guide](FRONTEND_INTEGRATION.md)** - Guide for integrating the API with frontend applications, including CORS setup, datetime handling, error handling, and code examples
+- **[API Documentation](docs/API_DOCUMENTATION.md)** - Complete API reference with all endpoints, request/response formats, and data models
+- **[Frontend Integration Guide](docs/FRONTEND_INTEGRATION.md)** - Guide for integrating the API with frontend applications, including CORS setup, datetime handling, error handling, and code examples
 
 ## Project Structure
 
 ```
 fastapi-reservations-ai/
-├── models.py                   # Pydantic models for data validation
-├── database.py                 # In-memory database and CRUD operations
-├── validation.py               # Business logic validation
+├── src/
+│   ├── __init__.py             # Package initialization
+│   ├── models.py               # Pydantic models for data validation
+│   ├── database.py             # In-memory database and CRUD operations
+│   └── validation.py           # Business logic validation
+├── tests/
+│   ├── test_api.py             # Integration tests for API endpoints
+│   ├── test_database.py        # Unit tests for database functions
+│   └── test_validation.py      # Unit tests for validation logic
+├── docs/
+│   ├── API_DOCUMENTATION.md    # Complete API reference
+│   └── FRONTEND_INTEGRATION.md # Frontend integration guide
 ├── main.py                     # FastAPI application and endpoints
-├── test_api.py                 # Integration tests for API endpoints
-├── test_database.py            # Unit tests for database functions
-├── test_validation.py          # Unit tests for validation logic
+├── conftest.py                 # Pytest configuration
 ├── Dockerfile                  # Docker container configuration
 ├── docker-compose.yml          # Docker Compose orchestration
 ├── .dockerignore               # Docker build exclusions
 ├── pyproject.toml              # Project dependencies and configuration
-├── README.md                   # This file
-├── API_DOCUMENTATION.md        # Complete API reference
-└── FRONTEND_INTEGRATION.md     # Frontend integration guide
+└── README.md                   # This file
 ```
 
 **Note**: This application uses an in-memory database. All data (customers, reservations) will be lost when the application restarts. This is suitable for demonstration and testing purposes.

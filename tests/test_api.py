@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime, timezone, timedelta
 from fastapi.testclient import TestClient
 from main import app
-import database
+from src import database
 
 
 @pytest.fixture(autouse=True)

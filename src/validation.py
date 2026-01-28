@@ -1,8 +1,8 @@
 """Validation logic for API endpoints."""
 
 from fastapi import HTTPException
-from models import ReservationCreate, CustomerCreate
-import database
+from src.models import ReservationCreate, CustomerCreate
+from src import database
 
 
 def validate_reservation(reservation_data: ReservationCreate) -> None:
