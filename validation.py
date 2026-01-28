@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from models import ReservationCreate
+from models import ReservationCreate, CustomerCreate
 import database
 
 
@@ -68,4 +68,23 @@ def validate_reservation_exists(reservation_id: int) -> None:
         raise HTTPException(
             status_code=404,
             detail=f"Reservation with id {reservation_id} not found"
+        )
+
+
+def validate_customer_unique(customer_data: CustomerCreate) -> None:
+    """
+    Validate that customer email and name are unique.
+
+    Raises HTTPException if email or name already exists.
+    """
+    if database.check_customer_email_exists(customer_data.email):
+        raise HTTPException(
+            status_code=409,
+            detail=f"Customer with email '{customer_data.email}' already exists"
+        )
+
+    if database.check_customer_name_exists(customer_data.name):
+        raise HTTPException(
+            status_code=409,
+            detail=f"Customer with name '{customer_data.name}' already exists"
         )

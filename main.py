@@ -51,6 +51,7 @@ def list_rooms():
 @app.post("/customers", response_model=Customer, status_code=201)
 def create_customer(customer_data: CustomerCreate):
     """Create a new customer."""
+    validation.validate_customer_unique(customer_data)
     return database.create_customer(name=customer_data.name, email=customer_data.email)
 
 

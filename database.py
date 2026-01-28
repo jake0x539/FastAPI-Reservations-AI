@@ -103,6 +103,22 @@ def delete_reservation(reservation_id: int) -> bool:
     return len(reservations) < initial_length
 
 
+def check_customer_email_exists(email: str) -> bool:
+    """
+    Check if a customer with the given email already exists.
+    Returns True if email exists, False otherwise.
+    """
+    return any(customer.email == email for customer in customers)
+
+
+def check_customer_name_exists(name: str) -> bool:
+    """
+    Check if a customer with the given name already exists.
+    Returns True if name exists, False otherwise.
+    """
+    return any(customer.name == name for customer in customers)
+
+
 def create_customer(name: str, email: str) -> Customer:
     """Create a new customer."""
     global _next_customer_id
