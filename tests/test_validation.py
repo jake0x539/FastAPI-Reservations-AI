@@ -76,7 +76,7 @@ def test_validate_reservation_past_time():
     with pytest.raises(HTTPException) as exc_info:
         validation.validate_reservation(reservation_data)
 
-    assert exc_info.value.status_code == 400
+    assert exc_info.value.status_code == 422
     assert "Cannot create reservations in the past" in exc_info.value.detail
 
 

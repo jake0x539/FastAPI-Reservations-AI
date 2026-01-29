@@ -170,7 +170,7 @@ def test_create_reservation_past_time():
             "end_time": end.isoformat()
         }
     )
-    assert response.status_code == 400
+    assert response.status_code == 422
     assert "Cannot create reservations in the past" in response.json()["detail"]
 
 

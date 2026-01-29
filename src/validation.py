@@ -27,7 +27,7 @@ def validate_reservation(reservation_data: ReservationCreate) -> None:
 
     if database.check_past_reservation(reservation_data.start_time):
         raise HTTPException(
-            status_code=400,
+            status_code=422,
             detail="Cannot create reservations in the past"
         )
 
